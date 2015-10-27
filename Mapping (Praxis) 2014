@@ -1,0 +1,52 @@
+1. Link to CartoDB - Set up new free account
+2. Import Master file with data data - cleaned up subway/language data (save this file on your computer somewhere you can find it again)
+	Important points about data
+        Spreadsheets must be .csv files
+        Shape files must all have the same name (zip them all together before importing, so dual_lang_school.zip file would contain dual_lang_school.shp, dual_lang_school.dbf, ne_10m_populated_places.shx and dual_lang_school.prj).
+
+3. Geocode data 
+	Chose latitude and longitude
+4. Chose map view
+	From the wizard, can choose Choropleth
+	Problem: Not very informative, 
+	Great for plotting information, can change the maps to make it pretty, etc, but can only look at one thing at a time, etc.
+	
+5. That's all fine, and can be used to make very nice maps, but let's do some analysis with this tool.
+	Import the nysd zip file - this will create a shape file map of all the school districts
+	Now import the School Locations file.
+	Open the school districts file, go to options, and join them - this will let you count the number of dots within a shape file (for this case, it's the number of subways stations in a school district. 
+	If you are trying to count the number of dots in a polygon (i.e., the number of schools in a school district)
+	
+6. Look at this in the data view to get more of an idea of what kind of information you can process.
+
+7. Another example - Program types in school districts:
+	Make sure you've imported these three data sets:
+	* New York City School Districts (nysd)
+	* Public Schools Points 2011-2012a (this data does not have any geographic information - so we have to extrapolate it)
+	* NYC Public High School Program Data
+	
+	Step 1:
+	Open Public High School Points, go to options and Merge with Table 
+	Select Column Join (ats_code) with NYPublic High School Programs (dbn)
+	Rename your file in all lower case I'm going to call it school program location
+	
+	Step 2: 
+	Open nysd shape file, go to options and Merge with Table
+	Select Spatial Join
+	Select Count
+	Rename your table
+	
+	Step 3:
+	We are only interested in the school that HAVE an interest area - so we want to apply a filter.
+	Click on the icon that looks like a column graph
+	Select Interest Area
+	Deselect null
+	Now click on SQL - (Structured Query Language), this is the code for the filter you just created. Eventually you can just work with this code rather than using the filters
+	Now Apply Query, return to the table and Create Table from Query
+	
+	Save the table from this Query
+	Rename it
+	Open it up again and now we can play with the maps
+	Notice that there's something wrong - our data is actually incomplete
+	
+	Do another one - with the number of museums in each school district, make a text box, etc.
